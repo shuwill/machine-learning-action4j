@@ -12,6 +12,9 @@ import org.nd4j.linalg.factory.Nd4j;
  */
 public class AppTest {
 
+    /**
+     * Test for K-近邻算法的classify0()
+     */
     @Test
     public void testKNN() {
         INDArray inXs = Nd4j.create(new float[]{20000, 200});
