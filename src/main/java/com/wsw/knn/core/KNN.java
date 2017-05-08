@@ -1,4 +1,4 @@
-package com.wsw.knn;
+package com.wsw.knn.core;
 
 import com.wsw.utils.Sort;
 import org.nd4j.linalg.api.ndarray.INDArray;
@@ -36,7 +36,7 @@ public class KNN {
             double distance = dataSet.distance2(inX);
             distances.add(distance);
         }
-        System.out.println(distances.toString());
+        //System.out.println(distances.toString());
 
         //距离排序
         Sort<Double> sort = new Sort<>();
@@ -44,7 +44,7 @@ public class KNN {
         sort.setArray(distances.toArray(data));
         Integer[] indexs = sort.createIndexArray();
         Arrays.sort(indexs, sort);
-        System.out.println(Arrays.toString(indexs));
+        //System.out.println(Arrays.toString(indexs));
 
         //统计距离最近的k个已知数据的类别，以多数投票的形式确定未知数据的类别。
         Map<String, Integer> vote = new HashMap<>();
@@ -59,7 +59,6 @@ public class KNN {
                 vote.put(label, count + 1);
             }
         }
-        System.out.println(vote.toString());
         int count = 0;
         String label = null;
         for (Map.Entry<String, Integer> entry : vote.entrySet()) {

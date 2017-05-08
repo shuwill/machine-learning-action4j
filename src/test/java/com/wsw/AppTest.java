@@ -1,10 +1,13 @@
 package com.wsw;
 
 
-import com.wsw.knn.KNN;
+import com.wsw.knn.ExampleKNN;
+import com.wsw.knn.core.KNN;
 import org.junit.Test;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
+
+import java.util.Map;
 
 /**
  * @author Wangshuwei
@@ -24,5 +27,20 @@ public class AppTest {
         System.out.println(KNN.classify0(inXs, dataSet, labels, 4));
     }
 
+    @Test
+    public void testFileToMatrix() {
+        Map<String, Object> map = ExampleKNN.fileToMatrix("/data/datingTestSet2.txt");
+        System.out.println(map.toString());
+    }
+
+    @Test
+    public void testAutoNorm() {
+        ExampleKNN.aotuNorm((INDArray) ExampleKNN.fileToMatrix("/data/datingTestSet2.txt").get("dataSet"));
+    }
+
+    @Test
+    public void testDatingClassifier() {
+        ExampleKNN.datingClassesTest();
+    }
 
 }
