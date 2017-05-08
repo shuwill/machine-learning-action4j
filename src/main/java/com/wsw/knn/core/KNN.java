@@ -48,16 +48,19 @@ public class KNN {
 
         //统计距离最近的k个已知数据的类别，以多数投票的形式确定未知数据的类别。
         Map<String, Integer> vote = new HashMap<>();
-        for (int i = 0; i < k; i++) {
-            int index = indexs[i];
-            //list.add(label[index]);
-            String label = labels[index];
-            Integer count = vote.get(label);
-            if (count == null) {
-                vote.put(label, 1);
+        int k_ = 0;
+        for (Integer index : indexs) {
+            if (k_ == k) {
+                break;
             } else {
-                vote.put(label, count + 1);
+                String label = labels[index];
+                if (vote.containsKey(label)) {
+                    vote.put(label, vote.get(label) + 1);
+                } else {
+                    vote.put(label, 1);
+                }
             }
+            k_++;
         }
         int count = 0;
         String label = null;
@@ -68,7 +71,35 @@ public class KNN {
             }
         }
 
+        /*String[] resultLabels = new String[k];
+        int k_ = 0;
+        for (Integer index : indexs) {
+            if (k_ == k) {
+                break;
+            } else {
+                resultLabels[k_] = labels[index];
+            }
+            k_++;
+        }
+        System.out.println(k_);*/
         return label;
     }
 
+    public static String vote(String[] labels) {
+        String result = null;
+        int count = 0;
+
+        for (String label : labels) {
+            if (count == 0) {
+                result = label;
+                count = 1;
+            } else if (label.equals(result)) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+
+        return result;
+    }
 }
