@@ -85,8 +85,8 @@ public class ExampleKNN {
         //归一化特征值
         int rows = dataSet.rows();
         INDArray ranges = maxVals.sub(minVals);
-        INDArray normDataSet = dataSet.sub(Nd4j.repeat(minVals, rows));
-        normDataSet = normDataSet.div(Nd4j.repeat(ranges, rows));
+        INDArray normDataSet = dataSet.sub(Nd4j.tile(minVals, rows));
+        normDataSet = normDataSet.div(Nd4j.tile(ranges, rows));
 
         /*LOGGER.info("dataSizeRows: " + dataSet.rows());
         LOGGER.info("minVals: " + minVals);
