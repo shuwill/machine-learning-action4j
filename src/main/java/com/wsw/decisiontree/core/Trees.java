@@ -74,7 +74,8 @@ public class Trees {
                 double prob = subDataSet.size() / (double) dataSets.size();
                 newEntropy += prob * calcShnnoEnt(subDataSet);
             }
-            double infoGain = baseEntropy - newEntropy;
+            double infoGain = baseEntropy - newEntropy; //信息获取量
+            System.out.println(infoGain);
             if (infoGain > bestInfoGain) {
                 bestInfoGain = infoGain;
                 bestFeature = i;

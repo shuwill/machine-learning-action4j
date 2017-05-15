@@ -1,7 +1,6 @@
 package com.wsw;
 
 
-import com.google.common.collect.Lists;
 import com.wsw.decisiontree.core.Trees;
 import com.wsw.knn.ExampleKNN;
 import com.wsw.knn.core.KNN;
@@ -10,7 +9,9 @@ import org.junit.Test;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Wangshuwei
@@ -55,16 +56,34 @@ public class AppTest {
         ExampleKNN.datingClassesTest();
     }
 
+    /**
+     * age(0,1,2:youth,middle,senior)
+     * income(0,1,2:low,middle,high)
+     * student(0,1:yes,no)
+     * credit_rating(0,1:fair,excellent)
+     * result(yes,no)
+     */
     @Test
     public void testCalcShnnoEnt() {
         List<List<Object>> dataSets = new ArrayList<>();
-        dataSets.add(Util.convertList(1, 1, "yes"));
-        dataSets.add(Util.convertList(1, 0, "yes"));
-        dataSets.add(Util.convertList(1, 0, "yes"));
-        dataSets.add(Util.convertList(0, 1, "no"));
-        dataSets.add(Util.convertList(0, 1, "no"));
+
+        dataSets.add(Util.convertList(0, 2, 0, 0, "no"));
+        dataSets.add(Util.convertList(0, 2, 0, 1, "no"));
+        dataSets.add(Util.convertList(1, 2, 0, 0, "yes"));
+        dataSets.add(Util.convertList(2, 1, 0, 0, "yes"));
+        dataSets.add(Util.convertList(2, 0, 1, 0, "yes"));
+        dataSets.add(Util.convertList(2, 0, 1, 1, "no"));
+        dataSets.add(Util.convertList(1, 0, 1, 1, "yes"));
+        dataSets.add(Util.convertList(0, 1, 0, 0, "no"));
+        dataSets.add(Util.convertList(0, 0, 0, 0, "yes"));
+        dataSets.add(Util.convertList(2, 1, 0, 0, "yes"));
+        dataSets.add(Util.convertList(0, 1, 1, 1, "yes"));
+        dataSets.add(Util.convertList(1, 1, 0, 1, "yes"));
+        dataSets.add(Util.convertList(1, 2, 1, 0, "yes"));
+        dataSets.add(Util.convertList(2, 1, 0, 1, "no"));
+
         System.out.println(Trees.calcShnnoEnt(dataSets));
-        System.out.println(Trees.splitDataSet(dataSets, 0, 1));
+        //System.out.println(Trees.splitDataSet(dataSets, 0, 1));
         //System.out.println(dataSets);
         System.out.println(Trees.chooseBestFeatureToSplit(dataSets));
 
