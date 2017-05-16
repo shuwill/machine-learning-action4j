@@ -13,5 +13,4 @@ public class Util {
     public static List<Object> convertList(Object... objects) {
         return new ArrayList<>(Arrays.asList(objects));
     }
-
 }

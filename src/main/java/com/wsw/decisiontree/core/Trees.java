@@ -75,7 +75,7 @@ public class Trees {
                 newEntropy += prob * calcShnnoEnt(subDataSet);
             }
             double infoGain = baseEntropy - newEntropy; //信息获取量
-            System.out.println(infoGain);
+            //System.out.println(infoGain);
             if (infoGain > bestInfoGain) {
                 bestInfoGain = infoGain;
                 bestFeature = i;
@@ -84,4 +84,35 @@ public class Trees {
         return bestFeature;
     }
 
+    /**
+     * 生成决策树
+     *
+     * @param dataSet:数据集
+     * @param label       :数据标签
+     * @return :Object对象，可转成JSON格式
+     */
+    public static Object createTree(List<List<Object>> dataSet, List<String> label) {
+        List<String> classList = new ArrayList<>();
+        dataSet.forEach(item -> classList.add((String) item.get(dataSet.get(0).size() - 1)));
+        if (classList.stream().filter(item -> item.equals(classList.get(0))).count() == classList.size()) {
+            System.out.println(classList.get(0));
+            return classList.get(0);
+        }
+
+        int bestFeature = chooseBestFeatureToSplit(dataSet);
+        String bestFeatureLabel = label.get(bestFeature);
+        System.out.println(bestFeatureLabel);
+        Map<String, Map> tree = new HashMap<>();
+        tree.put(bestFeatureLabel, new HashMap<>());
+        label.remove(bestFeature);
+        Set<Object> featValues = new HashSet<>();
+        dataSet.forEach(item -> featValues.add(item.get(bestFeature)));
+        for (Object value : featValues) {
+            List<String> subList = new ArrayList<>(label);  //关键步骤，作为原先label的拷贝，到从list删除元素时，不会影响上次递归函数入栈后label
+            tree.get(bestFeatureLabel).put(value,
+                    createTree(splitDataSet(dataSet, bestFeature, (Integer) value), subList));
+        }
+
+        return tree;
+    }
 }

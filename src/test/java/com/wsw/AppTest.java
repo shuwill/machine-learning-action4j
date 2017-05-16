@@ -1,6 +1,7 @@
 package com.wsw;
 
 
+import com.alibaba.fastjson.JSON;
 import com.wsw.decisiontree.core.Trees;
 import com.wsw.knn.ExampleKNN;
 import com.wsw.knn.core.KNN;
@@ -82,10 +83,18 @@ public class AppTest {
         dataSets.add(Util.convertList(1, 2, 1, 0, "yes"));
         dataSets.add(Util.convertList(2, 1, 0, 1, "no"));
 
-        System.out.println(Trees.calcShnnoEnt(dataSets));
+        List<String> labels = new ArrayList<>();
+        labels.add("age");
+        labels.add("income");
+        labels.add("student");
+        labels.add("credit_rating");
+
+        Object o=Trees.createTree(dataSets, labels);
+        System.out.println(JSON.toJSONString(o));
+        //System.out.println(Trees.calcShnnoEnt(dataSets));
         //System.out.println(Trees.splitDataSet(dataSets, 0, 1));
         //System.out.println(dataSets);
-        System.out.println(Trees.chooseBestFeatureToSplit(dataSets));
+        // System.out.println(Trees.chooseBestFeatureToSplit(dataSets));
 
     }
 
