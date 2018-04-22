@@ -95,13 +95,13 @@ public class Trees {
         List<String> classList = new ArrayList<>();
         dataSet.forEach(item -> classList.add((String) item.get(dataSet.get(0).size() - 1)));
         if (classList.stream().filter(item -> item.equals(classList.get(0))).count() == classList.size()) {
-            System.out.println(classList.get(0));
+            //System.out.println(classList.get(0));
             return classList.get(0);
         }
 
         int bestFeature = chooseBestFeatureToSplit(dataSet);
         String bestFeatureLabel = label.get(bestFeature);
-        System.out.println(bestFeatureLabel);
+        //System.out.println(bestFeatureLabel);
         Map<String, Map> tree = new HashMap<>();
         tree.put(bestFeatureLabel, new HashMap<>());
         label.remove(bestFeature);

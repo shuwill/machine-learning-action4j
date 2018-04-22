@@ -65,7 +65,7 @@ public class AppTest {
      * result(yes,no)
      */
     @Test
-    public void testCalcShnnoEnt() {
+    public void testDecisiontrees() {
         List<List<Object>> dataSets = new ArrayList<>();
 
         dataSets.add(Util.convertList(0, 2, 0, 0, "no"));
@@ -89,7 +89,7 @@ public class AppTest {
         labels.add("student");
         labels.add("credit_rating");
 
-        Object o=Trees.createTree(dataSets, labels);
+        Object o = Trees.createTree(dataSets, labels);
         System.out.println(JSON.toJSONString(o));
         //System.out.println(Trees.calcShnnoEnt(dataSets));
         //System.out.println(Trees.splitDataSet(dataSets, 0, 1));
